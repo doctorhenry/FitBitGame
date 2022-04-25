@@ -1,9 +1,40 @@
 import { HeartRateSensor } from "heart-rate";
 import document from "document";
 import display from "display";
+import * as mqtt from "mqtt";
+
+// FitBit variables
 const hrmLabel = document.getElementById("hrm-label");
 const hrmData = document.getElementById("hrm-data");
 const sensors = [];
+
+// MQTT variables
+var mqtt_url = 'm21.cloudmqtt.com';
+let topic = 'biosignal';
+const client = mqtt.connect(mqtt_url);
+const consoleData = document.getElementById("console-data");
+
+// Connect to cloud MQTT instance
+client.on('connect', function () {
+    client.subscribe(topic, function (err) {
+     if (!err) {
+       client.publish(topic, 'Hello mqtt')
+       hrmData.text= "Connected to cloud MQTT";
+     }
+     else
+     {
+        hrmData.text= "Failed to connect to cloud MQTT with error: ". err;
+     }
+  })
+})
+
+client.on('message', function (topic, message) {
+   // message is Buffer
+   console.log(message.toString())
+   client.end()
+})
+
+// Test message
 console.log('Hello world!');
 
 if (HeartRateSensor) {
