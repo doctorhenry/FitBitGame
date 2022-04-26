@@ -3,6 +3,7 @@ import document from "document";
 import display from "display";
 import * as messaging from "messaging";
 
+
 // FitBit variables
 const hrmLabel = document.getElementById("hrm-label");
 const hrmData = document.getElementById("hrm-data");
@@ -36,7 +37,6 @@ client.on('message', function (topic, message) {
    console.log(message.toString())
    client.end()
 })*/
-
 
 // Test message
 console.log('Hello world!');
