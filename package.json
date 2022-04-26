@@ -13,9 +13,7 @@
     "appDisplayName": "My New App",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
-    "requestedPermissions": [
-      "access_heart_rate"
-    ],
+    "requestedPermissions": ["access_heart_rate"],
     "buildTargets": [
       "higgs",
       "meson",
