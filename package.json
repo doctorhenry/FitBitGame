@@ -28,9 +28,5 @@
   "scripts": {
     "build": "fitbit-build",
     "debug": "fitbit"
-  },
-  "dependencies": {
-    "express": "^4.17.3",
-    "mqtt": "^4.3.7"
   }
 }
