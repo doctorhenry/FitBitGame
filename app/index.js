@@ -4,6 +4,7 @@ import display from "display";
 const hrmLabel = document.getElementById("hrm-label");
 const hrmData = document.getElementById("hrm-data");
 const sensors = [];
+
 console.log('Hello world!');
 
 if (HeartRateSensor) {
