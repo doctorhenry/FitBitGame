@@ -11,33 +11,6 @@ const consoleLabel = document.getElementById("console-label");
 const consoleData = document.getElementById("console-data");
 const sensors = [];
 
-// MQTT variables
-/*const mqtt = require('mqtt');
-var mqtt_url = 'm21.cloudmqtt.com';
-let topic = 'biosignal';
-const client = mqtt.connect(mqtt_url);
-const consoleData = document.getElementById("console-data");
-
-// Connect to cloud MQTT instance
-client.on('connect', function () {
-    client.subscribe(topic, function (err) {
-     if (!err) {
-       client.publish(topic, 'Hello mqtt')
-       hrmData.text= "Connected to cloud MQTT";
-     }
-     else
-     {
-        hrmData.text= "Failed to connect to cloud MQTT with error: ". err;
-     }
-  })
-})
-
-client.on('message', function (topic, message) {
-   // message is Buffer
-   console.log(message.toString())
-   client.end()
-})*/
-
 // Test message
 console.log('Hello world!');
 
@@ -61,9 +34,7 @@ messaging.peerSocket.addEventListener("error", (err) => {
 
 //Use the HeartRate API to get the data from the sensors
 if (HeartRateSensor) {
-    const hrm = new HeartRateSensor({ frequency: 1 });
-    fetchHR();
-    
+    const hrm = new HeartRateSensor({ frequency: 1 });    
     hrm.addEventListener("reading", () => {
         let hrRate = JSON.stringify({
         heartRate: hrm.heartRate ? hrm.heartRate : 0        
