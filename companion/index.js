@@ -5,7 +5,7 @@ import { me as companion } from "companion";
 //const wsUri = "ws://localhost:8080";
 //PieSocket Test only!!
 //const wsUri = "wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self";
-const wsUri = "wss://s3707.lon1.piesocket.com/v3/1?api_key=bCn3KCclCotVPFkVmrOQKkI9i0bFqPEFQRa37LDl&notify_self";
+const wsUri = "production_url;";
 const websocket = new WebSocket(wsUri);
 var counter = 0;
 
