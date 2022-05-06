@@ -34,7 +34,7 @@ messaging.peerSocket.addEventListener("error", (err) => {
 
 //Use the HeartRate API to get the data from the sensors
 if (HeartRateSensor) {
-    const hrm = new HeartRateSensor({ frequency: 1 });    
+    const hrm = new HeartRateSensor({ frequency: 1});    
     hrm.addEventListener("reading", () => {
         let hrRate = JSON.stringify({
         heartRate: hrm.heartRate ? hrm.heartRate : 0        
@@ -54,5 +54,5 @@ else
   
 display.addEventListener("change", () => {
 // Automatically stop all sensors when the screen is off to conserve battery
-display.on ? sensors.map(sensor => sensor.start()) : sensors.map(sensor => sensor.stop());
+//display.on ? sensors.map(sensor => sensor.start()) : sensors.map(sensor => sensor.stop());
 });

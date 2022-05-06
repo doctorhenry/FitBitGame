@@ -5,38 +5,9 @@ import { me as companion } from "companion";
 //const wsUri = "ws://localhost:8080";
 //PieSocket Test only!!
 //const wsUri = "wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self";
-const wsUri = "YOUR_OWN_URL";
+const wsUri = "wss://s3707.lon1.piesocket.com/v3/1?api_key=bCn3KCclCotVPFkVmrOQKkI9i0bFqPEFQRa37LDl&notify_self";
 const websocket = new WebSocket(wsUri);
-// const MILLISECONDS_PER_MINUTE = 1000 * 60;
-
-// // Tell the Companion to wake after 5 minutes
-// companion.wakeInterval = 5 * MILLISECONDS_PER_MINUTE;
-
-// // Listen for the event
-// companion.addEventListener("wakeinterval", doThis);
-
-// // Event happens if the companion is launched and has been asleep
-// if (companion.launchReasons.wokenUp) {
-//    doThis();
-// }
-
-// function doThis() {
-//    console.log("Wake interval happened!");
-// }
-
-// // Listen for the event
-// companion.addEventListener("readystatechange", doThis);
-
-// // The Device application caused the Companion to start
-// if (companion.launchReasons.peerAppLaunched) {
-//   doThis();
-// }
-
-// function doThis() {
-//   console.log("Device application was launched!");
-
-
-// }
+var counter = 0;
 
 websocket.addEventListener("open", onOpen);
 websocket.addEventListener("close", onClose);
@@ -79,19 +50,32 @@ messaging.peerSocket.addEventListener("message", (evt) => {
 
 messaging.peerSocket.addEventListener("message", (evt) => {
     if (evt.data) {
-        console.log(evt.data);
+        console.log("fitibt-data: "+ evt.data);
+        counter = counter + 1;
+        console.log("counter: "+ counter);
         //WS from here to the localhost server.
         // The localhost server uses npm ws and is not part of this repo.
         //See: https://github.com/websockets/ws
-        websocket.send(evt.data);
+        //websocket.send(evt.data);
+        if(counter >= 5)
+        {
+            SendSocketMessage(evt.data);
+            counter = 0;
+        }        
     }
 });
 
 messaging.peerSocket.addEventListener("error", (err) => {
     console.error(`Connection error: ${err.code} - ${err.message}`);
 });
+const delay = ms => new Promise(res => setTimeout(res, ms));
+async function SendSocketMessage(message)
+{
+    await delay(5000);
+    console.log("sending socket msg: " + message);
+    websocket.send(message);
+}
 
 //Fetch the hear rate every two minutes
-setInterval(fetchHR, 2 * 1000 * 60);
-
+//setInterval(fetchHR,  3000);
 
